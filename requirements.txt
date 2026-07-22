@@ -4,3 +4,4 @@ pillow-heif
 requests
 gunicorn
 Werkzeug
+Flask-Limiter

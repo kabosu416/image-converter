@@ -2,6 +2,8 @@ import os
 import uuid
 import time
 from flask import Flask, request, render_template, send_file, jsonify, url_for
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from PIL import Image
 import pillow_heif
 import requests
@@ -10,6 +12,15 @@ import requests
 pillow_heif.register_heif_opener()
 
 app = Flask(__name__)
+
+# 【セキュリティ強化】レートリミット（連打攻撃対策）
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://"
+)
+
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -45,6 +56,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/convert', methods=['POST'])
+@limiter.limit("10 per minute")
 def convert_image():
     # 変換前に古いファイルを掃除する
     cleanup_old_files()
