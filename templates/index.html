@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Image Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" title="ライト/ダーク切替">
+        <i class="ph ph-sun light-icon"></i>
+        <i class="ph ph-moon dark-icon"></i>
+    </div>
+
+    <div class="container glass-panel">
+        <header>
+            <h1><i class="ph-fill ph-magic-wand"></i> Magic Converter</h1>
+            <p>画像をドロップして一瞬で変換。<br>iPhoneのHEIC画像にも対応！</p>
+        </header>
+
+        <div class="upload-area" id="dropZone">
+            <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.gif,.webp,.heic" hidden>
+            <i class="ph-duotone ph-upload-simple upload-icon"></i>
+            <h3>画像をドロップするか、クリックして選択</h3>
+            <span class="supported-formats">対応フォーマット: HEIC, JPG, PNG, WEBP, GIF</span>
+        </div>
+
+        <div class="settings-area" id="settingsArea" style="display: none;">
+            <div class="file-info">
+                <i class="ph-fill ph-image"></i>
+                <span id="fileName">image.heic</span>
+            </div>
+            
+            <div class="format-selector">
+                <label>変換先フォーマット:</label>
+                <div class="radio-group">
+                    <input type="radio" id="fmt-png" name="format" value="png" checked>
+                    <label for="fmt-png">PNG</label>
+                    
+                    <input type="radio" id="fmt-jpg" name="format" value="jpg">
+                    <label for="fmt-jpg">JPG</label>
+                    
+                    <input type="radio" id="fmt-webp" name="format" value="webp">
+                    <label for="fmt-webp">WEBP</label>
+                </div>
+            </div>
+
+            <!-- Googleのテスト用サイトキー（常に成功）を使用しています -->
+            <div class="g-recaptcha" data-sitekey="6LdCQF8tAAAAALwEkBNYpb8FtE6nYiCQA49E8pAA" style="margin-bottom: 1.5rem; display: flex; justify-content: center;"></div>
+
+            <button id="convertBtn" class="primary-btn">
+                <i class="ph-bold ph-arrows-clockwise"></i> 画像を変換する
+            </button>
+        </div>
+
+        <div class="result-area" id="resultArea" style="display: none;">
+            <div class="success-icon">
+                <i class="ph-fill ph-check-circle"></i>
+            </div>
+            <h3>変換成功！</h3>
+            
+            <div class="download-box">
+                <p>別の端末でダウンロードするためのURL:</p>
+                <div class="url-container">
+                    <input type="text" id="downloadUrl" readonly>
+                    <button id="copyBtn" class="icon-btn" title="URLをコピー">
+                        <i class="ph-bold ph-copy"></i>
+                    </button>
+                </div>
+                <p class="hint">※同じWi-Fiに繋がっているスマホ等でこのURLを開くとダウンロードできます。</p>
+                
+                <a id="directDownloadBtn" href="#" class="primary-btn outline" download>
+                    <i class="ph-bold ph-download-simple"></i> この端末にダウンロード
+                </a>
+                <button id="convertAnotherBtn" class="text-btn">別の画像を変換する</button>
+            </div>
+        </div>
+
+        <!-- 読み込み中画面 -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>魔法をかけています...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

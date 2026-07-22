@@ -1,0 +1,6 @@
+Flask
+Pillow
+pillow-heif
+requests
+gunicorn
+Werkzeug
