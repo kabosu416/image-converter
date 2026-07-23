@@ -5,3 +5,4 @@ requests
 gunicorn
 Werkzeug
 Flask-Limiter
+python-dotenv
