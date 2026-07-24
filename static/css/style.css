@@ -94,6 +94,13 @@ header h1 {
     color: var(--accent);
 }
 
+.app-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 header p {
     color: var(--text-secondary);
     font-size: 0.95rem;
