@@ -37,15 +37,27 @@
             
             <div class="format-selector">
                 <label>変換先フォーマット:</label>
-                <div class="radio-group">
-                    <input type="radio" id="fmt-png" name="format" value="png" checked>
-                    <label for="fmt-png">PNG</label>
-                    
-                    <input type="radio" id="fmt-jpg" name="format" value="jpg">
-                    <label for="fmt-jpg">JPG</label>
-                    
-                    <input type="radio" id="fmt-webp" name="format" value="webp">
-                    <label for="fmt-webp">WEBP</label>
+                <div class="radio-group" id="formatRadioGroup">
+                    <div class="format-option" data-format="png">
+                        <input type="radio" id="fmt-png" name="format" value="png" checked>
+                        <label for="fmt-png">PNG</label>
+                    </div>
+                    <div class="format-option" data-format="jpg">
+                        <input type="radio" id="fmt-jpg" name="format" value="jpg">
+                        <label for="fmt-jpg">JPG</label>
+                    </div>
+                    <div class="format-option" data-format="webp">
+                        <input type="radio" id="fmt-webp" name="format" value="webp">
+                        <label for="fmt-webp">WEBP</label>
+                    </div>
+                    <div class="format-option" data-format="gif">
+                        <input type="radio" id="fmt-gif" name="format" value="gif">
+                        <label for="fmt-gif">GIF</label>
+                    </div>
+                    <div class="format-option" data-format="heic">
+                        <input type="radio" id="fmt-heic" name="format" value="heic">
+                        <label for="fmt-heic">HEIC</label>
+                    </div>
                 </div>
             </div>
 

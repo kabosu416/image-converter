@@ -52,6 +52,32 @@ document.addEventListener('DOMContentLoaded', () => {
         fileName.textContent = file.name;
         dropZone.style.display = 'none';
         settingsArea.style.display = 'block';
+
+        const ext = file.name.split('.').pop().toLowerCase();
+        let targetExt = ext;
+        if (targetExt === 'jpeg') targetExt = 'jpg';
+
+        const formatOptions = document.querySelectorAll('.format-option');
+        let firstVisibleInput = null;
+
+        formatOptions.forEach(option => {
+            const format = option.getAttribute('data-format');
+            const input = option.querySelector('input[type="radio"]');
+            
+            if (format === targetExt) {
+                option.style.display = 'none';
+            } else {
+                option.style.display = 'flex';
+                if (!firstVisibleInput) {
+                    firstVisibleInput = input;
+                }
+            }
+        });
+
+        const currentChecked = document.querySelector('input[name="format"]:checked');
+        if (currentChecked && currentChecked.closest('.format-option').style.display === 'none' && firstVisibleInput) {
+            firstVisibleInput.checked = true;
+        }
     }
 
     // Convert Image

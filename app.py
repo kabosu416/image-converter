@@ -80,7 +80,7 @@ RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyH
 RECAPTCHA_SECRET_KEY = os.environ.get('RECAPTCHA_SECRET_KEY', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe')
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'heic'}
-TARGET_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'gif'}
+TARGET_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'gif', 'heic'}
 
 # ============================================================
 # 【4. アップロード対策】マジックナンバー定義
@@ -368,8 +368,12 @@ def convert_image():
             # Convert to RGB if saving as JPEG and image has alpha channel
             if target_format == 'jpeg' and img.mode in ('RGBA', 'P', 'LA'):
                 img = img.convert('RGB')
+            
+            pillow_format = target_format.upper()
+            if target_format == 'heic':
+                pillow_format = 'HEIF'
 
-            img.save(output_path, format=target_format.upper())
+            img.save(output_path, format=pillow_format)
 
         # Generate the download URL
         download_url = url_for('download_file', file_id=new_filename, _external=True)
