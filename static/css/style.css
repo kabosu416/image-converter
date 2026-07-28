@@ -65,6 +65,20 @@ body {
 :root[data-theme="dark"] .dark-icon { display: none; }
 :root[data-theme="light"] .light-icon { display: none; }
 
+/* ライトモード時の切り替えボタン強調 */
+:root[data-theme="light"] .theme-toggle {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    color: var(--accent);
+}
+
+:root[data-theme="light"] .theme-toggle:hover {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 6px 16px rgba(109, 40, 217, 0.25);
+}
+
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
