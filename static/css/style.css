@@ -34,6 +34,7 @@ body {
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: background 0.3s ease, color 0.3s ease;
@@ -386,4 +387,33 @@ header p {
         padding: 0.5rem;
         font-size: 0.9rem;
     }
+}
+
+/* フッター */
+.app-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    z-index: 10;
+}
+
+.app-footer .social-links {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.app-footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.2s;
+}
+
+.app-footer a:hover {
+    color: var(--accent);
 }
