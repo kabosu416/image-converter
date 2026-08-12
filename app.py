@@ -47,6 +47,34 @@ security_logger = logging.getLogger('security')
 security_logger.setLevel(logging.WARNING)
 security_logger.addHandler(security_handler)
 
+# Discord Webhook エラー通知ハンドラー
+class DiscordWebhookHandler(logging.Handler):
+    def __init__(self, webhook_url):
+        super().__init__()
+        self.webhook_url = webhook_url
+
+    def emit(self, record):
+        try:
+            msg = self.format(record)
+            payload = {
+                "content": f"🚨 **System Alert** 🚨\n```\n{msg}\n```"
+            }
+            requests.post(self.webhook_url, json=payload, timeout=5)
+        except Exception:
+            pass
+
+DISCORD_WEBHOOK_URL = os.environ.get('DISCORD_WEBHOOK_URL')
+if DISCORD_WEBHOOK_URL:
+    discord_handler = DiscordWebhookHandler(DISCORD_WEBHOOK_URL)
+    discord_handler.setLevel(logging.ERROR)
+    discord_handler.setFormatter(logging.Formatter(
+        '%(asctime)s [%(levelname)s] %(message)s'
+    ))
+    
+    # 既存のロガーに Discord 通知をアタッチ
+    app.logger.addHandler(discord_handler)
+    security_logger.addHandler(discord_handler)
+
 # ============================================================
 # 【1. レートリミット】Flask-Limiter
 # ============================================================
@@ -282,6 +310,19 @@ def ratelimit_handler(e):
     return jsonify({
         'error': 'リクエストが多すぎます。しばらく待ってから再試行してください。'
     }), 429
+
+@app.errorhandler(Exception)
+def global_exception_handler(e):
+    """【監視】予期せぬエラーをすべて捕捉し、Discordへ通知（app.logger経由）"""
+    import traceback
+    tb = traceback.format_exc()
+    app.logger.error(
+        f"Unhandled Exception: {str(e)}\n"
+        f"Path: {request.path}\n"
+        f"IP: {get_real_ip()}\n"
+        f"Traceback:\n{tb}"
+    )
+    return jsonify({'error': 'サーバー内部でエラーが発生しました。'}), 500
 
 
 # ============================================================
