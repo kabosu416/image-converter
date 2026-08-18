@@ -165,4 +165,45 @@ document.addEventListener('DOMContentLoaded', () => {
             cookieBanner.style.display = 'none';
         });
     }
+
+    // Easter Egg
+    const appLogo = document.querySelector('.app-logo');
+    if (appLogo) {
+        let clickCount = 0;
+        let easterEggTimeout;
+        
+        appLogo.addEventListener('click', () => {
+            // リンク内のロゴ（利用規約ページ等）では発動させない
+            if (appLogo.closest('a')) return;
+
+            clickCount++;
+            clearTimeout(easterEggTimeout);
+            
+            if (clickCount >= 5) {
+                appLogo.classList.add('doge-mode-logo');
+                document.body.classList.add('doge-mode-rainbow');
+                
+                const title = document.querySelector('header h1');
+                const originalTitle = title ? title.innerHTML : '';
+                
+                if (title) {
+                    title.innerHTML = `<img src="${appLogo.src}" alt="Logo" class="app-logo doge-mode-logo"> Wow. Much Converter. Such fast.`;
+                }
+
+                // 5秒後に元に戻す
+                setTimeout(() => {
+                    appLogo.classList.remove('doge-mode-logo');
+                    document.body.classList.remove('doge-mode-rainbow');
+                    clickCount = 0;
+                    if (title) {
+                        title.innerHTML = originalTitle;
+                    }
+                }, 5000);
+            } else {
+                easterEggTimeout = setTimeout(() => {
+                    clickCount = 0;
+                }, 1000); // 1秒間クリックが途切れたらリセット
+            }
+        });
+    }
 });

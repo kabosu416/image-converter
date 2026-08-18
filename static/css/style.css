@@ -572,3 +572,23 @@ header p {
         padding: 0.4rem 0.3rem;
     }
 }
+
+/* Easter Egg */
+.doge-mode-logo {
+    animation: spin-fast 0.15s linear infinite !important;
+}
+
+.doge-mode-rainbow {
+    animation: rainbow-bg 2s linear infinite !important;
+}
+
+@keyframes spin-fast {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rainbow-bg {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
