@@ -338,6 +338,11 @@ def privacy():
     return render_template('privacy.html')
 
 
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+
 @app.route('/convert', methods=['POST'])
 @limiter.limit("10 per minute")
 def convert_image():

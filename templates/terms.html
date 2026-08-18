@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用規約 | Kabosu Image Converter</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body>
+    <div class="container glass-panel policy-page">
+        <div class="theme-toggle" id="themeToggle" title="ライト/ダーク切替">
+            <i class="ph ph-sun light-icon"></i>
+            <i class="ph ph-moon dark-icon"></i>
+        </div>
+
+        <header>
+            <h1><a href="/" class="home-link"><img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo" class="app-logo"> Kabosu Image Converter</a></h1>
+        </header>
+
+        <div class="policy-content">
+            <!-- 日本語セクション -->
+            <h2>利用規約</h2>
+            <p class="policy-updated">最終更新日: 2026年8月18日</p>
+
+            <p>この利用規約（以下「本規約」といいます。）は、Kabosu Image Converter（以下「本サービス」といいます。）の利用条件を定めるものです。利用者の皆様（以下「ユーザー」といいます。）は、本サービスを利用することにより、本規約に同意したものとみなされます。</p>
+
+            <h3>第1条（適用および同意）</h3>
+            <p>1. 本規約は、ユーザーと運営者との間の本サービスの利用に関わる一切の関係に適用されるものとします。<br>
+            2. ユーザーは、本サービスを利用を開始した時点で、本規約のすべての記載内容に同意したものとみなされます。</p>
+
+            <h3>第2条（禁止事項）</h3>
+            <p>ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。</p>
+            <ul>
+                <li>法令または公序良俗に違反する行為（児童ポルノ、わいせつ画像などの違法な画像データのアップロードを含みますが、これに限りません）</li>
+                <li>犯罪行為に関連する行為</li>
+                <li>本サービスの内容等、本サービスに含まれる著作権、商標権ほか知的財産権を侵害する行為（他人の著作物を無断でアップロード・変換する行為を含みます）</li>
+                <li>運営者、ほかのユーザー、またはその他第三者のサーバーまたはネットワークの機能を破壊したり、妨害したりする行為</li>
+                <li>本サービスに過度な負荷をかける行為（DoS攻撃、短時間での大量アクセス等）</li>
+                <li>不正アクセスをし、またはこれを試みる行為</li>
+                <li>その他、運営者が不適切と判断する行為</li>
+            </ul>
+
+            <h3>第3条（免責事項）</h3>
+            <p>1. 本サービスは現状有姿（「AS IS」）で提供されます。運営者は、本サービスに事実上または法律上の瑕疵（安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性、セキュリティなどに関する欠陥、エラーやバグ、権利侵害などを含みます。）がないことを明示的にも黙示的にも保証しておりません。<br>
+            2. 運営者は、本サービスの利用に起因してユーザーに生じたあらゆる損害（画像データの消失・破損、変換後の品質劣化、サービスの中断・停止等を含みますが、これらに限りません）について、一切の責任を負いません。また、お問い合わせフォームの利用によって生じた損害についても、運営者は一切の保証を行いません。</p>
+
+            <h3>第4条（準拠法・管轄裁判所）</h3>
+            <p>1. 本規約の解釈にあたっては、日本法を準拠法とします。<br>
+            2. 本サービスに関して紛争が生じた場合には、運営者の所在地を管轄する仙台地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+
+            <h3>第5条（お問い合わせ）</h3>
+            <p>本規約やサービスに関するお問い合わせは、以下のフォームよりご連絡ください。</p>
+            <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfRwxfoucf0yn44pFqanOsfYeAI_RbEj5d0dBhxMIz5tNfYug/viewform" target="_blank" rel="noopener noreferrer"><strong>お問い合わせフォーム（Google Forms）</strong></a></p>
+
+            <hr class="policy-divider">
+
+            <!-- 英語セクション -->
+            <h2>Terms of Service</h2>
+            <p class="policy-updated">Last updated: August 18, 2026</p>
+
+            <p>These Terms of Service ("Terms") govern your access to and use of Kabosu Image Converter ("the Service"). By using the Service, you agree to be bound by these Terms.</p>
+
+            <h3>1. Applicability and Consent</h3>
+            <p>By accessing or using the Service, you are deemed to have agreed to all provisions of these Terms.</p>
+
+            <h3>2. Prohibited Actions</h3>
+            <p>When using the Service, users are prohibited from engaging in the following acts:</p>
+            <ul>
+                <li>Acts that violate laws, regulations, or public order and morals (including but not limited to uploading illegal images such as child pornography or obscene materials)</li>
+                <li>Acts related to criminal activities</li>
+                <li>Acts that infringe on the copyrights, trademark rights, or other intellectual property rights contained in the Service or belonging to others (including unauthorized uploading and conversion of others' copyrighted works)</li>
+                <li>Acts that destroy or interfere with the functionality of the servers or networks of the operator, other users, or third parties</li>
+                <li>Acts that place an excessive load on the Service (e.g., DoS attacks, massive requests in a short time)</li>
+                <li>Unauthorized access or attempts thereof</li>
+                <li>Other acts deemed inappropriate by the operator</li>
+            </ul>
+
+            <h3>3. Disclaimer</h3>
+            <p>The Service is provided "AS IS" without warranty of any kind. The operator shall not be liable for any damages arising from the use of the Service, including but not limited to loss or corruption of image data, degradation of quality after conversion, or interruption or discontinuation of the Service. Furthermore, the operator provides no warranty and assumes no liability for any damages arising from the use of the contact form.</p>
+
+            <h3>4. Governing Law and Jurisdiction</h3>
+            <p>These Terms shall be governed by and construed in accordance with the laws of Japan. Any disputes arising in connection with the Service shall be subject to the exclusive jurisdiction of the Sendai District Court as the court of first instance.</p>
+
+            <h3>5. Contact</h3>
+            <p>For inquiries regarding these Terms and the Service, please use the contact form below:</p>
+            <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfRwxfoucf0yn44pFqanOsfYeAI_RbEj5d0dBhxMIz5tNfYug/viewform" target="_blank" rel="noopener noreferrer"><strong>Contact Form (Google Forms)</strong></a></p>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Kabosu Image Converter</p>
+        <div class="social-links">
+            <a href="https://github.com/kabosu416" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-github-logo"></i> GitHub</a>
+            <a href="https://www.instagram.com/kabosu_416" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-instagram-logo"></i> Instagram</a>
+            <a href="/terms"><i class="ph-bold ph-file-text"></i> 利用規約</a>
+            <a href="/privacy"><i class="ph-bold ph-shield-check"></i> プライバシーポリシー</a>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
