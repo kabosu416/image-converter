@@ -333,6 +333,11 @@ def index():
     return render_template('index.html', recaptcha_site_key=RECAPTCHA_SITE_KEY)
 
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+
 @app.route('/convert', methods=['POST'])
 @limiter.limit("10 per minute")
 def convert_image():

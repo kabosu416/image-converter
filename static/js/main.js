@@ -141,4 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
         dropZone.style.display = 'block';
         grecaptcha.reset();
     });
+
+    // Cookie同意バナー
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAcceptBtn = document.getElementById('cookieAcceptBtn');
+    if (cookieBanner && !localStorage.getItem('cookieConsent')) {
+        cookieBanner.style.display = 'flex';
+    }
+    if (cookieAcceptBtn) {
+        cookieAcceptBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.style.display = 'none';
+        });
+    }
 });
