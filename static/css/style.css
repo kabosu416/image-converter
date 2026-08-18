@@ -496,6 +496,16 @@ header p {
     margin: 0.5rem 0;
 }
 
+.policy-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.policy-content a:hover {
+    color: var(--accent-hover);
+}
+
 .policy-updated {
     font-size: 0.8rem;
     color: var(--text-secondary);
