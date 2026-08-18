@@ -171,33 +171,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (appLogo) {
         let clickCount = 0;
         let easterEggTimeout;
+        let isSpinning = false;
         
         appLogo.addEventListener('click', () => {
-            // リンク内のロゴ（利用規約ページ等）では発動させない
-            if (appLogo.closest('a')) return;
+            // リンク内のロゴ（利用規約ページ等）や、既に回転中の場合は発動させない
+            if (appLogo.closest('a') || isSpinning) return;
 
             clickCount++;
             clearTimeout(easterEggTimeout);
             
             if (clickCount >= 5) {
+                isSpinning = true;
                 appLogo.classList.add('doge-mode-logo');
                 document.body.classList.add('doge-mode-rainbow');
                 
                 const title = document.querySelector('header h1');
-                const originalTitle = title ? title.innerHTML : '';
+                let textNode = null;
+                let originalText = "";
                 
                 if (title) {
-                    title.innerHTML = `<img src="${appLogo.src}" alt="Logo" class="app-logo doge-mode-logo"> Wow. Much Converter. Such fast.`;
+                    for (let node of title.childNodes) {
+                        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                            textNode = node;
+                            originalText = node.textContent;
+                            node.textContent = " Wow. Much Converter. Such fast.";
+                            break;
+                        }
+                    }
                 }
 
                 // 5秒後に元に戻す
                 setTimeout(() => {
                     appLogo.classList.remove('doge-mode-logo');
                     document.body.classList.remove('doge-mode-rainbow');
-                    clickCount = 0;
-                    if (title) {
-                        title.innerHTML = originalTitle;
+                    if (textNode) {
+                        textNode.textContent = originalText;
                     }
+                    clickCount = 0;
+                    isSpinning = false;
                 }, 5000);
             } else {
                 easterEggTimeout = setTimeout(() => {
