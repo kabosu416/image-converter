@@ -146,22 +146,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (convertAnotherBtn) {
         const showQrBtn = document.getElementById('showQrBtn');
         const qrCodeContainer = document.getElementById('qrCodeContainer');
-        const qrCanvas = document.getElementById('qrCanvas');
+        const qrImage = document.getElementById('qrImage');
         let qrGenerated = false;
 
         if (showQrBtn) {
-            showQrBtn.addEventListener('click', () => {
+            showQrBtn.addEventListener('click', async () => {
                 if (qrCodeContainer.style.display === 'none') {
                     qrCodeContainer.style.display = 'block';
-                    if (!qrGenerated && typeof QRCode !== 'undefined') {
-                        new QRCode(qrCanvas, {
-                            text: downloadUrl.value,
-                            width: 200,
-                            height: 200,
-                            colorDark : "#000000",
-                            colorLight : "#ffffff"
-                        });
-                        qrGenerated = true;
+                    if (!qrGenerated) {
+                        try {
+                            const res = await fetch('/api/qrcode', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ url: downloadUrl.value })
+                            });
+                            const data = await res.json();
+                            if (data.qr_image) {
+                                qrImage.src = data.qr_image;
+                                qrGenerated = true;
+                            }
+                        } catch (e) {
+                            console.error('QR generation failed:', e);
+                        }
                     }
                 } else {
                     qrCodeContainer.style.display = 'none';
@@ -175,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resultArea.style.display = 'none';
             dropZone.style.display = 'block';
             if (qrCodeContainer) qrCodeContainer.style.display = 'none';
-            if (qrCanvas) qrCanvas.innerHTML = '';
+            if (qrImage) qrImage.src = '';
             qrGenerated = false;
             grecaptcha.reset();
         });

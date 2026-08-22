@@ -2,7 +2,10 @@ import os
 import uuid
 import time
 import struct
+import io
 import logging
+import qrcode
+import base64
 from logging.handlers import RotatingFileHandler
 from flask import Flask, request, render_template, send_file, jsonify, url_for
 from flask_limiter import Limiter
@@ -341,6 +344,28 @@ def privacy():
 @app.route('/terms')
 def terms():
     return render_template('terms.html')
+
+
+@app.route('/api/qrcode', methods=['POST'])
+@limiter.limit("20 per minute")
+def generate_qrcode():
+    """ダウンロードURLからQRコード画像(Base64)を生成して返す"""
+    data = request.get_json()
+    url = data.get('url', '') if data else ''
+    if not url:
+        return jsonify({'error': 'URLが指定されていません。'}), 400
+
+    qr = qrcode.QRCode(version=1, box_size=8, border=2)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    buf = io.BytesIO()
+    img.save(buf, format='PNG')
+    buf.seek(0)
+    b64 = base64.b64encode(buf.getvalue()).decode('utf-8')
+
+    return jsonify({'qr_image': f'data:image/png;base64,{b64}'})
 
 
 @app.route('/convert', methods=['POST'])

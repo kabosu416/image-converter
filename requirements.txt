@@ -6,3 +6,4 @@ gunicorn
 Werkzeug
 Flask-Limiter
 python-dotenv
+qrcode[pil]
