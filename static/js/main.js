@@ -154,11 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (qrCodeContainer.style.display === 'none') {
                     qrCodeContainer.style.display = 'block';
                     if (!qrGenerated && typeof QRCode !== 'undefined') {
-                        QRCode.toCanvas(qrCanvas, downloadUrl.value, {
+                        new QRCode(qrCanvas, {
+                            text: downloadUrl.value,
                             width: 200,
-                            margin: 1
-                        }, function (error) {
-                            if (error) console.error(error);
+                            height: 200,
+                            colorDark : "#000000",
+                            colorLight : "#ffffff"
                         });
                         qrGenerated = true;
                     }
@@ -174,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resultArea.style.display = 'none';
             dropZone.style.display = 'block';
             if (qrCodeContainer) qrCodeContainer.style.display = 'none';
+            if (qrCanvas) qrCanvas.innerHTML = '';
             qrGenerated = false;
             grecaptcha.reset();
         });

@@ -572,11 +572,14 @@ header p {
     text-align: center;
     animation: slideUpFade 0.3s ease;
 }
-.qr-container canvas {
+.qr-container #qrCanvas {
+    display: inline-block;
     border-radius: 12px;
     border: 1px solid var(--border);
     padding: 1rem;
     background: #ffffff; /* White background to ensure scannability */
-    max-width: 100%;
     box-shadow: 0 4px 20px -10px rgba(0,0,0,0.1);
+}
+.qr-container #qrCanvas img, .qr-container #qrCanvas canvas {
+    max-width: 100%;
 }
