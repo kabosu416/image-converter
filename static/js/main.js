@@ -156,11 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!qrGenerated && typeof QRCode !== 'undefined') {
                         QRCode.toCanvas(qrCanvas, downloadUrl.value, {
                             width: 200,
-                            margin: 1,
-                            color: {
-                                dark: '#000000',
-                                light: '#ffffff'
-                            }
+                            margin: 1
                         }, function (error) {
                             if (error) console.error(error);
                         });
