@@ -144,11 +144,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Convert Another
     if (convertAnotherBtn) {
+        const showQrBtn = document.getElementById('showQrBtn');
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        const qrCanvas = document.getElementById('qrCanvas');
+        let qrGenerated = false;
+
+        if (showQrBtn) {
+            showQrBtn.addEventListener('click', () => {
+                if (qrCodeContainer.style.display === 'none') {
+                    qrCodeContainer.style.display = 'block';
+                    if (!qrGenerated && typeof QRCode !== 'undefined') {
+                        QRCode.toCanvas(qrCanvas, downloadUrlInput.value, {
+                            width: 200,
+                            margin: 1,
+                            color: {
+                                dark: '#000000',
+                                light: '#ffffff'
+                            }
+                        }, function (error) {
+                            if (error) console.error(error);
+                        });
+                        qrGenerated = true;
+                    }
+                } else {
+                    qrCodeContainer.style.display = 'none';
+                }
+            });
+        }
+
         convertAnotherBtn.addEventListener('click', () => {
             currentFile = null;
             fileInput.value = '';
             resultArea.style.display = 'none';
             dropZone.style.display = 'block';
+            if (qrCodeContainer) qrCodeContainer.style.display = 'none';
+            qrGenerated = false;
             grecaptcha.reset();
         });
     }

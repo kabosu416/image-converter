@@ -556,3 +556,27 @@ header p {
     0% { filter: hue-rotate(0deg); }
     100% { filter: hue-rotate(360deg); }
 }
+
+/* QR Code & Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.action-buttons .primary-btn {
+    margin-top: 0;
+    flex: 1;
+}
+.qr-container {
+    margin-top: 1rem;
+    text-align: center;
+    animation: slideUpFade 0.3s ease;
+}
+.qr-container canvas {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 1rem;
+    background: #ffffff; /* White background to ensure scannability */
+    max-width: 100%;
+    box-shadow: 0 4px 20px -10px rgba(0,0,0,0.1);
+}
