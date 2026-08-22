@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (qrCodeContainer.style.display === 'none') {
                     qrCodeContainer.style.display = 'block';
                     if (!qrGenerated && typeof QRCode !== 'undefined') {
-                        QRCode.toCanvas(qrCanvas, downloadUrlInput.value, {
+                        QRCode.toCanvas(qrCanvas, downloadUrl.value, {
                             width: 200,
                             margin: 1,
                             color: {
